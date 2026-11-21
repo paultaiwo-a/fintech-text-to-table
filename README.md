@@ -26,7 +26,7 @@ As of September 2026, the live [Consumer Complaint Database](https://www.consume
 
 **Working file:** `data/raw/complaints.csv` — **27,991** rows (all with narratives). Pipeline cap is 100,000 (`config/scoring.yaml` → `ingest.max_rows`).
 
-Scoring is in `docs/scoring.md`. Column list is in `docs/data_dictionary.md`. Charts land in `reports/figures/`.
+Flow diagram: `docs/architecture.md`. Scoring is in `docs/scoring.md`. Column list is in `docs/data_dictionary.md`. Charts land in `reports/figures/`.
 
 ### How to Run
 
