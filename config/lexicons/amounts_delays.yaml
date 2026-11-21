@@ -1,0 +1,62 @@
+amount:
+  # Captures $1,234.56 / 1234 dollars / 5k
+  - rule_id: AMT-01
+    pattern: "\\$\\s*([0-9]{1,3}(?:,[0-9]{3})*(?:\\.[0-9]{1,2})?|[0-9]+(?:\\.[0-9]{1,2})?)"
+    regex: true
+  - rule_id: AMT-02
+    pattern: "([0-9]{1,3}(?:,[0-9]{3})*(?:\\.[0-9]{1,2})?)\\s*dollars?"
+    regex: true
+  - rule_id: AMT-03
+    pattern: "\\b([0-9]+(?:\\.[0-9]+)?)\\s*k\\b"
+    regex: true
+
+delay:
+  - rule_id: DLY-01
+    pattern: "(\\d+)\\s*days?"
+    regex: true
+  - rule_id: DLY-02
+    pattern: "(\\d+)\\s*weeks?"
+    regex: true
+    unit: weeks
+  - rule_id: DLY-03
+    pattern: "(\\d+)\\s*months?"
+    regex: true
+    unit: months
+  - rule_id: DLY-04
+    pattern: "over a month"
+    days: 30
+  - rule_id: DLY-05
+    pattern: "several weeks"
+    days: 21
+
+channel:
+  phone:
+    - rule_id: CH-PHONE-01
+      pattern: "called"
+    - rule_id: CH-PHONE-02
+      pattern: "phone"
+    - rule_id: CH-PHONE-03
+      pattern: "on hold"
+  branch:
+    - rule_id: CH-BR-01
+      pattern: "branch"
+    - rule_id: CH-BR-02
+      pattern: "in person"
+  app:
+    - rule_id: CH-APP-01
+      pattern: "mobile app"
+    - rule_id: CH-APP-02
+      pattern: "the app"
+  online:
+    - rule_id: CH-ON-01
+      pattern: "website"
+    - rule_id: CH-ON-02
+      pattern: "online banking"
+  email:
+    - rule_id: CH-EM-01
+      pattern: "email"
+  chat:
+    - rule_id: CH-CH-01
+      pattern: "chat"
+    - rule_id: CH-CH-02
+      pattern: "live chat"

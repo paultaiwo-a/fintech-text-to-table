@@ -1,0 +1,39 @@
+switching_intent:
+  - rule_id: SW-001
+    pattern: "closing my account"
+  - rule_id: SW-002
+    pattern: "close my account"
+  - rule_id: SW-003
+    pattern: "moving my money"
+  - rule_id: SW-004
+    pattern: "moved my money"
+  - rule_id: SW-005
+    pattern: "looking for another bank"
+  - rule_id: SW-006
+    pattern: "switching (banks|to another)"
+    regex: true
+  - rule_id: SW-007
+    pattern: "find(ing)? a new bank"
+    regex: true
+  - rule_id: SW-008
+    pattern: "taking my business elsewhere"
+  - rule_id: SW-009
+    pattern: "i('m| am) leaving"
+    regex: true
+  - rule_id: SW-010
+    pattern: "will not (be )?(banking|doing business) (here|with you|with them) anymore"
+    regex: true
+
+competitor_mentioned:
+  - rule_id: CMP-001
+    pattern: "another bank"
+  - rule_id: CMP-002
+    pattern: "different bank"
+  - rule_id: CMP-003
+    pattern: "my (new|other) (bank|credit union)"
+    regex: true
+  - rule_id: CMP-004
+    pattern: "switched to"
+  - rule_id: CMP-005
+    pattern: "opened an account (at|with)"
+    regex: true

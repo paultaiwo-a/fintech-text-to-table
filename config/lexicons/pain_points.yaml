@@ -1,0 +1,111 @@
+# Pain-point phrases. rule_id -> pattern (case-insensitive substring / regex).
+field_name: primary_pain_point
+
+fees:
+  - rule_id: PP-fees-01
+    pattern: "overdraft fee"
+  - rule_id: PP-fees-02
+    pattern: "monthly maintenance fee"
+  - rule_id: PP-fees-03
+    pattern: "hidden fee"
+  - rule_id: PP-fees-04
+    pattern: "charged me a fee"
+  - rule_id: PP-fees-05
+    pattern: "unnecessary fee"
+  - rule_id: PP-fees-06
+    pattern: "service charge"
+
+account_frozen_closed:
+  - rule_id: PP-frozen-01
+    pattern: "account (was |is )?frozen"
+    regex: true
+  - rule_id: PP-frozen-02
+    pattern: "closed my account"
+  - rule_id: PP-frozen-03
+    pattern: "account was closed"
+  - rule_id: PP-frozen-04
+    pattern: "locked (me )?out of my account"
+    regex: true
+
+transfer_slow_failed:
+  - rule_id: PP-xfer-01
+    pattern: "transfer (never|did not|didn't) go through"
+    regex: true
+  - rule_id: PP-xfer-02
+    pattern: "wire (was )?delayed"
+    regex: true
+  - rule_id: PP-xfer-03
+    pattern: "pending transfer"
+  - rule_id: PP-xfer-04
+    pattern: "failed transfer"
+  - rule_id: PP-xfer-05
+    pattern: "money (has )?not arrived"
+    regex: true
+
+fraud_unauthorized:
+  - rule_id: PP-fraud-01
+    pattern: "unauthorized (transaction|charge|withdrawal)"
+    regex: true
+  - rule_id: PP-fraud-02
+    pattern: "fraudulent"
+  - rule_id: PP-fraud-03
+    pattern: "i did not make (this|these) (charge|charges|transaction)"
+    regex: true
+  - rule_id: PP-fraud-04
+    pattern: "stolen (card|identity)"
+    regex: true
+
+service_unreachable:
+  - rule_id: PP-svc-01
+    pattern: "could not reach"
+  - rule_id: PP-svc-02
+    pattern: "no one (would )?help"
+    regex: true
+  - rule_id: PP-svc-03
+    pattern: "on hold for"
+  - rule_id: PP-svc-04
+    pattern: "customer service (was |is )?(useless|unhelpful|horrible)"
+    regex: true
+  - rule_id: PP-svc-05
+    pattern: "called (multiple|several|many) times"
+    regex: true
+
+funds_held_missing:
+  - rule_id: PP-funds-01
+    pattern: "funds (are |were )?missing"
+    regex: true
+  - rule_id: PP-funds-02
+    pattern: "deposit hold"
+  - rule_id: PP-funds-03
+    pattern: "held my (money|deposit|funds)"
+    regex: true
+  - rule_id: PP-funds-04
+    pattern: "money (has )?disappeared"
+    regex: true
+
+digital_access:
+  - rule_id: PP-digital-01
+    pattern: "app (would |will )?not (let me|work|open|load)"
+    regex: true
+  - rule_id: PP-digital-02
+    pattern: "cannot log in"
+  - rule_id: PP-digital-03
+    pattern: "website (is |was )?(down|broken|unavailable)"
+    regex: true
+  - rule_id: PP-digital-04
+    pattern: "online banking (is |was )?(down|broken)"
+    regex: true
+
+promo_not_honored:
+  - rule_id: PP-promo-01
+    pattern: "bonus (was |is )?not (credited|honored|received)"
+    regex: true
+  - rule_id: PP-promo-02
+    pattern: "promotion (was |is )?not honored"
+    regex: true
+  - rule_id: PP-promo-03
+    pattern: "promised (apr|apy|rate|reward)"
+    regex: true
+  - rule_id: PP-promo-04
+    pattern: "rewards? (were |was )?not (credited|applied)"
+    regex: true

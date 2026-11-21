@@ -1,0 +1,74 @@
+positive:
+  - rule_id: SEN-POS-01
+    pattern: "helpful"
+  - rule_id: SEN-POS-02
+    pattern: "resolved"
+  - rule_id: SEN-POS-03
+    pattern: "appreciate"
+  - rule_id: SEN-POS-04
+    pattern: "thank you"
+  - rule_id: SEN-POS-05
+    pattern: "quickly fixed"
+  - rule_id: SEN-POS-06
+    pattern: "great service"
+  - rule_id: SEN-POS-07
+    pattern: "professional"
+
+negative:
+  - rule_id: SEN-NEG-01
+    pattern: "frustrated"
+  - rule_id: SEN-NEG-02
+    pattern: "angry"
+  - rule_id: SEN-NEG-03
+    pattern: "disgusted"
+  - rule_id: SEN-NEG-04
+    pattern: "terrible"
+  - rule_id: SEN-NEG-05
+    pattern: "horrible"
+  - rule_id: SEN-NEG-06
+    pattern: "unacceptable"
+  - rule_id: SEN-NEG-07
+    pattern: "worst"
+  - rule_id: SEN-NEG-08
+    pattern: "scam"
+  - rule_id: SEN-NEG-09
+    pattern: "ripped off"
+  - rule_id: SEN-NEG-10
+    pattern: "never again"
+  - rule_id: SEN-NEG-11
+    pattern: "complaint"
+  - rule_id: SEN-NEG-12
+    pattern: "disappointed"
+
+negation:
+  - "not"
+  - "never"
+  - "no"
+  - "n't"
+
+frustration_phrases:
+  - rule_id: FRU-01
+    pattern: "fed up"
+  - rule_id: FRU-02
+    pattern: "had enough"
+  - rule_id: FRU-03
+    pattern: "this is ridiculous"
+  - rule_id: FRU-04
+    pattern: "absolutely unacceptable"
+  - rule_id: FRU-05
+    pattern: "beyond frustrated"
+  - rule_id: FRU-06
+    pattern: "losing patience"
+
+repeated_contact:
+  - rule_id: FRU-RC-01
+    pattern: "called (again|[0-9]+ times)"
+    regex: true
+  - rule_id: FRU-RC-02
+    pattern: "contacted .+ (again|multiple times)"
+    regex: true
+  - rule_id: FRU-RC-03
+    pattern: "still waiting"
+  - rule_id: FRU-RC-04
+    pattern: "for the (second|third|fourth|fifth) time"
+    regex: true

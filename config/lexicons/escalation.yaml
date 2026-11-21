@@ -1,0 +1,44 @@
+legal:
+  - rule_id: ESC-LEG-01
+    pattern: "lawyer"
+  - rule_id: ESC-LEG-02
+    pattern: "attorney"
+  - rule_id: ESC-LEG-03
+    pattern: "sue"
+  - rule_id: ESC-LEG-04
+    pattern: "lawsuit"
+  - rule_id: ESC-LEG-05
+    pattern: "legal action"
+
+regulator:
+  - rule_id: ESC-REG-01
+    pattern: "cfpb"
+  - rule_id: ESC-REG-02
+    pattern: "consumer financial protection"
+  - rule_id: ESC-REG-03
+    pattern: "file a complaint with"
+  - rule_id: ESC-REG-04
+    pattern: "banking regulator"
+  - rule_id: ESC-REG-05
+    pattern: "federal reserve"
+
+bbb:
+  - rule_id: ESC-BBB-01
+    pattern: "better business bureau"
+  - rule_id: ESC-BBB-02
+    pattern: "\\bbbb\\b"
+    regex: true
+
+media:
+  - rule_id: ESC-MED-01
+    pattern: "social media"
+  - rule_id: ESC-MED-02
+    pattern: "news (station|outlet|reporter)"
+    regex: true
+  - rule_id: ESC-MED-03
+    pattern: "go (public|viral)"
+    regex: true
+  - rule_id: ESC-MED-04
+    pattern: "twitter"
+  - rule_id: ESC-MED-05
+    pattern: "tiktok"
