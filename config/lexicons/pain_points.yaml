@@ -29,7 +29,7 @@ account_frozen_closed:
 
 transfer_slow_failed:
   - rule_id: PP-xfer-01
-    pattern: "transfer (never|did not|didn't) go through"
+    pattern: "transfer (never|did not|didn't) (go|went) through"
     regex: true
   - rule_id: PP-xfer-02
     pattern: "wire (was )?delayed"
