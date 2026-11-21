@@ -50,9 +50,15 @@ review:
   max_needs_review_share: 0.15
 
 ingest:
+  # Built from CFPB Narratives Archive Full Records (Jan–Apr 2026 exports).
+  # Live CCDB downloads no longer include narratives (Release 24, Sept 2026).
+  # Working file: data/raw/complaints.csv (27,991 rows with narratives).
+  # date 2026-01-01 to 2026-04-30; checking/savings (checking, savings);
+  # credit card (general-purpose); money transfer (wallet, domestic, international,
+  # money order/cashier's check, check cashing).
   products:
     - "Checking or savings account"
     - "Money transfer, virtual currency, or money service"
     - "Credit card"
-  lookback_years: 3
-  max_rows: 50000
+  lookback_years: 1
+  max_rows: 100000

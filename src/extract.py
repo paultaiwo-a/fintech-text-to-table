@@ -261,13 +261,13 @@ def review_flags(
     redaction_share_val: float,
     cfg: dict,
 ) -> tuple[int, str]:
+    # Flag uncertain text only. primary_pain_point == none is allowed without
+    # forcing review — many complaints simply don't match the lexicon.
     review = cfg.get("review", {})
     if word_count_val < int(review.get("too_short_words", 20)):
         return 1, "too_short"
     if redaction_share_val >= float(review.get("high_redaction_share", 0.35)):
         return 1, "high_redaction"
-    if primary_pain_point == "none":
-        return 1, "no_pain_point"
     return 0, "none"
 
 

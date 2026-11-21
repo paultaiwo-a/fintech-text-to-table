@@ -94,11 +94,23 @@ def export_fct_interaction(
     finally:
         con.close()
 
-    parquet_path = exports_dir / "fct_interaction.parquet"
     csv_path = exports_dir / "fct_interaction.csv"
-    df.to_parquet(parquet_path, index=False)
     df.to_csv(csv_path, index=False)
-    return {"rows": len(df), "parquet": str(parquet_path), "csv": str(csv_path)}
+
+    parquet_path = exports_dir / "fct_interaction.parquet"
+    try:
+        df.to_parquet(parquet_path, index=False)
+    except (ImportError, ValueError, OSError) as exc:
+        # pyarrow/fastparquet may be missing (common on bare Anaconda)
+        print(f"   parquet skipped ({exc.__class__.__name__}); wrote CSV only")
+        parquet_path = None
+
+    return {
+        "rows": len(df),
+        "parquet": str(parquet_path) if parquet_path else None,
+        "csv": str(csv_path),
+    }
+
 
 
 def run_extract_score_load(db_path: Path = DB_PATH) -> dict:

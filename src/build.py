@@ -23,6 +23,9 @@ def build(csv_path: Path = DEFAULT_CSV, db_path: Path = DB_PATH) -> None:
     print("3/5 extract, score, load")
     load_summary = run_extract_score_load(db_path=db_path)
     print(f"   wrote {load_summary['fct_interaction']:,} rows to fct_interaction")
+    print(f"   export CSV: {load_summary.get('csv')}")
+    if load_summary.get("parquet"):
+        print(f"   export parquet: {load_summary['parquet']}")
 
     print("4/5 quality checks")
     run_quality_checks(db_path=db_path, raise_on_fail=True)
@@ -30,6 +33,7 @@ def build(csv_path: Path = DEFAULT_CSV, db_path: Path = DB_PATH) -> None:
     print("5/5 insights")
     run_insights(db_path=db_path)
     print("done")
+
 
 
 if __name__ == "__main__":

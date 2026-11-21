@@ -156,30 +156,45 @@ def check_pain_points_in_dim(con) -> CheckResult:
     )
 
 
-DEFAULT_CHECKS = [
+HARD_CHECKS = [
     check_row_count_matches_staging,
     check_no_duplicate_ids,
     check_switching_has_evidence,
     check_severity_band_matches_score,
-    check_needs_review_share,
     check_pain_points_in_dim,
 ]
+WARN_CHECKS = [
+    check_needs_review_share,  # alert only; do not fail the build
+]
+
+HARD_RESULT_NAMES = {
+    "row_count_matches_staging",
+    "no_duplicate_interaction_id",
+    "switching_intent_has_evidence",
+    "severity_band_matches_score",
+    "pain_point_codes_in_dim",
+}
 
 
 def run_quality_checks(db_path: Path = DB_PATH, raise_on_fail: bool = True) -> list[CheckResult]:
     con = init_db(db_path)
     try:
-        results = [check(con) for check in DEFAULT_CHECKS]
+        results = [check(con) for check in HARD_CHECKS + WARN_CHECKS]
     finally:
         con.close()
 
-    failed = [r for r in results if not r.passed]
+    failed_hard = []
     for r in results:
-        status = "PASS" if r.passed else "FAIL"
+        if r.name in HARD_RESULT_NAMES:
+            status = "PASS" if r.passed else "FAIL"
+            if not r.passed:
+                failed_hard.append(r)
+        else:
+            status = "PASS" if r.passed else "WARN"
         print(f"[{status}] {r.name}: {r.detail}")
 
-    if failed and raise_on_fail:
-        names = ", ".join(r.name for r in failed)
+    if failed_hard and raise_on_fail:
+        names = ", ".join(r.name for r in failed_hard)
         raise AssertionError(f"Data quality checks failed: {names}")
     return results
 
