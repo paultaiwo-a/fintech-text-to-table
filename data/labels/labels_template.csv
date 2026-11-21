@@ -1,0 +1,2 @@
+interaction_id,primary_pain_point,switching_intent,amount_usd_max,delay_days_max,sentiment_label,notes
+CFPB-0000000,fees,1,1200,14,negative,example row — replace with real IDs from fct_interaction
