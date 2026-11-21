@@ -1,0 +1,58 @@
+extractor_version: "1.0.0"
+
+sentiment:
+  negation_window: 3
+  negative_threshold: -0.2
+  positive_threshold: 0.2
+
+frustration:
+  phrase_weight: 0.4
+  phrase_cap: 3
+  repeated_contact_weight: 0.3
+  exclamation_or_caps_weight: 0.2
+  very_negative_weight: 0.1
+  very_negative_sentiment: -0.5
+
+severity:
+  amount_points:
+    none: 0
+    under_100: 5
+    from_100_to_999: 15
+    from_1000_to_9999: 25
+    from_10000_plus: 30
+  delay_points:
+    none: 0
+    under_7_days: 5
+    from_7_to_29_days: 15
+    from_30_days_plus: 25
+  escalation_points: 20
+  switching_intent_points: 15
+  very_negative_sentiment_points: 10
+  very_negative_sentiment: -0.5
+  bands:
+    low: [0, 24]
+    medium: [25, 49]
+    high: [50, 74]
+    critical: [75, 100]
+
+lead_signal:
+  switching_intent_points: 40
+  challenger_addressable_points: 25
+  amount_threshold_usd: 1000
+  amount_points: 15
+  competitor_mentioned_points: 10
+  recent_days: 90
+  recent_points: 10
+
+review:
+  high_redaction_share: 0.35
+  too_short_words: 20
+  max_needs_review_share: 0.15
+
+ingest:
+  products:
+    - "Checking or savings account"
+    - "Money transfer, virtual currency, or money service"
+    - "Credit card"
+  lookback_years: 3
+  max_rows: 50000
