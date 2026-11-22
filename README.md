@@ -49,4 +49,4 @@ python -m src.build
 python -m src.build --csv /path/to/another-export.csv
 ```
 
-Outputs: `db/signals.db`, `exports/fct_interaction.csv`, `reports/figures/`. Optional: `notebooks/demo.ipynb`.
+Outputs: `output/signals.db`, `output/exports/fct_interaction.csv`, `output/figures/`. Optional: `notebooks/demo.ipynb`.

@@ -7,12 +7,10 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from src.ingest import DB_PATH, init_db
-from src.schema import DIM_PAIN_POINT_SEED
+from src.pipeline.ingest import DB_PATH, init_db
+from src.pipeline.schema import DIM_PAIN_POINT_SEED
 
-ROOT = Path(__file__).resolve().parents[1]
-LEXICON_DIR = ROOT / "config" / "lexicons"
-SCORING_PATH = ROOT / "config" / "scoring.yaml"
+from src.paths import LEXICON_DIR, SCORING_PATH
 
 
 def _extractor_version() -> str:

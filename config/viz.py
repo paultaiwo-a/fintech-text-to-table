@@ -20,7 +20,7 @@ TABLEAU_COLORBLIND = [
 
 BLUE = TABLEAU_COLORBLIND[0]
 ORANGE = TABLEAU_COLORBLIND[1]
-FIGURES_DIR = Path(__file__).resolve().parents[1] / "reports" / "figures"
+FIGURES_DIR = Path(__file__).resolve().parents[1] / "output" / "figures"
 
 
 def apply_style() -> None:

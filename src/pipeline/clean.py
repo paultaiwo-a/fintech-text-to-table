@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.ingest import DB_PATH, init_db
+from src.pipeline.ingest import DB_PATH, init_db
 
 REDACTION_PATTERNS = [
     (re.compile(r"\bX{2,}\b", re.IGNORECASE), "<redacted>"),

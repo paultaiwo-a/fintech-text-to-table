@@ -8,15 +8,12 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from config.viz import BLUE, ORANGE, apply_style, categorical_colors, save_fig
-from src.ingest import DB_PATH, init_db
-
-ROOT = Path(__file__).resolve().parents[1]
-SQL_DIR = ROOT / "sql" / "analysis"
-FIGURES_DIR = ROOT / "reports" / "figures"
+from src.paths import ANALYSIS_SQL_DIR, DB_PATH, FIGURES_DIR
+from src.pipeline.ingest import init_db
 
 
 def _read_sql_file(name: str, con) -> pd.DataFrame:
-    sql = (SQL_DIR / name).read_text()
+    sql = (ANALYSIS_SQL_DIR / name).read_text()
     return pd.read_sql(sql, con)
 
 

@@ -9,10 +9,9 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from src.schema import DIM_PAIN_POINT_SEED
+from src.pipeline.schema import DIM_PAIN_POINT_SEED
 
-ROOT = Path(__file__).resolve().parents[1]
-SCORING_PATH = ROOT / "config" / "scoring.yaml"
+from src.paths import SCORING_PATH
 
 TOKEN_RE = re.compile(r"\S+")
 EXCLAIM_OR_CAPS_RE = re.compile(r"!|(?:\b[A-Z]{3,}\b)")
@@ -267,7 +266,7 @@ def apply_scores(extract_result: dict) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    from src.extract import extract_interaction, load_lexicons
+    from src.pipeline.extract import extract_interaction, load_lexicons
 
     lex = load_lexicons()
     cfg = load_scoring_config()

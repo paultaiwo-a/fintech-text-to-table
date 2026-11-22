@@ -7,12 +7,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from src.ingest import DB_PATH, init_db
+from src.paths import DB_PATH, LABELS_PATH, LABELS_TEMPLATE_PATH, OUTPUT_DIR
+from src.pipeline.ingest import init_db
 
-ROOT = Path(__file__).resolve().parents[1]
-LABELS_PATH = ROOT / "data" / "labels" / "labels.csv"
-TEMPLATE_PATH = ROOT / "data" / "labels" / "labels_template.csv"
-REPORTS_DIR = ROOT / "reports"
+TEMPLATE_PATH = LABELS_TEMPLATE_PATH
+REPORTS_DIR = OUTPUT_DIR
 
 LABEL_FIELDS = [
     "primary_pain_point",
@@ -265,7 +264,7 @@ def sample_for_labelling(db_path: Path = DB_PATH, n: int = 150, seed: int = 42) 
     sample["sentiment_label"] = ""
     sample["notes"] = ""
 
-    out = ROOT / "data" / "labels" / "labels_to_annotate.csv"
+    out = LABELS_PATH.parent / "labels_to_annotate.csv"
     sample.to_csv(out, index=False)
     print(f"Wrote {out} ({n} rows). Fill labels, save as labels.csv")
     return out

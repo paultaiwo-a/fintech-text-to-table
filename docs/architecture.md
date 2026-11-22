@@ -7,23 +7,23 @@ CFPB CSV                    config/
 (data/raw/complaints.csv)   scoring.yaml + lexicons
         |                            |
         v                            v
-   ingest.py  -->  raw_complaints
+   pipeline/ingest.py  -->  raw_complaints
         |
-   clean.py   -->  stg_sentences
+   pipeline/clean.py   -->  stg_sentences
         |
-   extract.py -->  fields + evidence
+   pipeline/extract.py -->  fields + evidence
         |
-   score.py   -->  sentiment / severity / lead signal
+   pipeline/score.py   -->  sentiment / severity / lead signal
         |
-   load.py    -->  fct_interaction
-                   fct_interaction_pain_point
-                   fct_extraction_evidence
-                   dim_pain_point / dim_rule
+   pipeline/load.py    -->  fct_interaction
+                           fct_interaction_pain_point
+                           fct_extraction_evidence
+                           dim_pain_point / dim_rule
         |
-   quality.py -->  pass / fail checks
+   pipeline/quality.py -->  pass / fail checks
         |
-   insights.py --> charts (reports/figures/)
-                   export (exports/fct_interaction.csv)
+   insights.py         --> charts (output/figures/)
+                           export (output/exports/)
 ```
 
 
@@ -31,15 +31,15 @@ CFPB CSV                    config/
 ### What each step does
 
 
-| Step     | Module            | Output                                           |
-| -------- | ----------------- | ------------------------------------------------ |
-| Ingest   | `src/ingest.py`   | `raw_complaints`                                 |
-| Clean    | `src/clean.py`    | `stg_sentences`                                  |
-| Extract  | `src/extract.py`  | pain point, switching, amounts, delays, evidence |
-| Score    | `src/score.py`    | sentiment, frustration, severity, lead signal    |
-| Load     | `src/load.py`     | fact + dim tables in `db/signals.db`             |
-| Quality  | `src/quality.py`  | row checks after load                            |
-| Insights | `src/insights.py` | SQL charts + CSV export                          |
+| Step     | Module                     | Output                                           |
+| -------- | -------------------------- | ------------------------------------------------ |
+| Ingest   | `src/pipeline/ingest.py`   | `raw_complaints`                                 |
+| Clean    | `src/pipeline/clean.py`    | `stg_sentences`                                  |
+| Extract  | `src/pipeline/extract.py`  | pain point, switching, amounts, delays, evidence |
+| Score    | `src/pipeline/score.py`    | sentiment, frustration, severity, lead signal    |
+| Load     | `src/pipeline/load.py`     | fact + dim tables in `output/signals.db`         |
+| Quality  | `src/pipeline/quality.py`  | row checks after load                            |
+| Insights | `src/insights.py`          | SQL charts + CSV export                          |
 
 
 

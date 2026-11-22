@@ -6,13 +6,13 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.extract import extract_all
-from src.ingest import DB_PATH, init_db
-from src.schema import column_names
-from src.score import apply_scores
-from src.seed import seed_dimensions
+from src.pipeline.extract import extract_all
+from src.pipeline.ingest import DB_PATH, init_db
+from src.pipeline.schema import column_names
+from src.pipeline.score import apply_scores
+from src.pipeline.seed import seed_dimensions
 
-EXPORTS_DIR = Path(__file__).resolve().parents[1] / "exports"
+from src.paths import EXPORTS_DIR
 
 
 def _nullify_nans(df: pd.DataFrame) -> pd.DataFrame:

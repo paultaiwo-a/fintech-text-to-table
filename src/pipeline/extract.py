@@ -9,12 +9,10 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from src.clean import redaction_share, word_count
-from src.ingest import DB_PATH, init_db
+from src.pipeline.clean import redaction_share, word_count
+from src.pipeline.ingest import DB_PATH, init_db
 
-ROOT = Path(__file__).resolve().parents[1]
-LEXICON_DIR = ROOT / "config" / "lexicons"
-SCORING_PATH = ROOT / "config" / "scoring.yaml"
+from src.paths import LEXICON_DIR, SCORING_PATH
 
 PAIN_POINT_CODES = [
     "fees",

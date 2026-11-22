@@ -4,11 +4,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.clean import stage_sentences
-from src.ingest import DB_PATH, DEFAULT_CSV, ingest_cfpb
 from src.insights import run_insights
-from src.load import run_extract_score_load
-from src.quality import run_quality_checks
+from src.paths import DB_PATH, DEFAULT_CSV
+from src.pipeline.clean import stage_sentences
+from src.pipeline.ingest import ingest_cfpb
+from src.pipeline.load import run_extract_score_load
+from src.pipeline.quality import run_quality_checks
 
 
 def build(csv_path: Path = DEFAULT_CSV, db_path: Path = DB_PATH) -> None:
@@ -33,7 +34,6 @@ def build(csv_path: Path = DEFAULT_CSV, db_path: Path = DB_PATH) -> None:
     print("5/5 insights")
     run_insights(db_path=db_path)
     print("done")
-
 
 
 if __name__ == "__main__":

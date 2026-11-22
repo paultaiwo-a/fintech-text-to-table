@@ -8,10 +8,9 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from src.ingest import DB_PATH, init_db
+from src.pipeline.ingest import DB_PATH, init_db
 
-ROOT = Path(__file__).resolve().parents[1]
-SCORING_PATH = ROOT / "config" / "scoring.yaml"
+from src.paths import SCORING_PATH
 
 SEVERITY_BANDS = {
     "low": (0, 24),

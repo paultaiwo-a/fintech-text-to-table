@@ -9,11 +9,9 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-ROOT = Path(__file__).resolve().parents[1]
-DB_PATH = ROOT / "db" / "signals.db"
-DDL_PATH = ROOT / "sql" / "ddl.sql"
-CONFIG_PATH = ROOT / "config" / "scoring.yaml"
-DEFAULT_CSV = ROOT / "data" / "raw" / "complaints.csv"
+from src.paths import CONFIG_DIR, DB_PATH, DDL_PATH, DEFAULT_CSV
+
+CONFIG_PATH = CONFIG_DIR / "scoring.yaml"
 
 USECOLS = [
     "Complaint ID",
