@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -32,6 +33,12 @@ SOFT = "#5fa2ce"
 
 BLUE = ACCENT
 ORANGE = HIGHLIGHT
+
+# Context marks: everything that is not the finding stays gray
+NEUTRAL = "#a3acb9"
+NEUTRAL_DARK = "#7b848f"
+
+SOURCE_NOTE = "Source: CFPB Consumer Complaint Narratives Archive, Jan to Apr 2026"
 
 PAIN_POINT_LABELS = {
     "fees": "Fees",
@@ -93,6 +100,45 @@ def polish_axes(ax: plt.Axes, *, grid: str = "x") -> None:
     elif grid == "y":
         ax.yaxis.grid(True, color=GRID, linewidth=0.8)
         ax.set_axisbelow(True)
+
+
+def wilson_ci(k: float, n: float, z: float = 1.96) -> tuple[float, float]:
+    """95% Wilson score interval for a proportion k/n (safe for small n and p near 0)."""
+    if n <= 0:
+        return (0.0, 0.0)
+    p = k / n
+    denom = 1 + z**2 / n
+    center = (p + z**2 / (2 * n)) / denom
+    half = z * math.sqrt(p * (1 - p) / n + z**2 / (4 * n**2)) / denom
+    return (max(0.0, center - half), min(1.0, center + half))
+
+
+def add_header(
+    fig: plt.Figure,
+    title: str,
+    subtitle: str | None = None,
+    source: str | None = SOURCE_NOTE,
+) -> tuple[float, float, float, float]:
+    """Figure-level title, subtitle and source line that can never overlap.
+
+    Returns the rect to pass to fig.tight_layout(rect=...) so the axes
+    stay clear of the header and footer.
+    """
+    h = fig.get_figheight()
+    top = 1 - 0.10 / h
+    fig.text(0.012, top, title, ha="left", va="top",
+             fontsize=14, fontweight="semibold", color=INK)
+    header_in = 0.48
+    if subtitle:
+        fig.text(0.012, top - 0.32 / h, subtitle, ha="left", va="top",
+                 fontsize=9.5, color=MUTED)
+        header_in = 0.78
+    footer_in = 0.02
+    if source:
+        fig.text(0.012, 0.06 / h, source, ha="left", va="bottom",
+                 fontsize=8.5, color=MUTED)
+        footer_in = 0.32
+    return (0, footer_in / h, 1, 1 - header_in / h)
 
 
 def save_fig(fig: plt.Figure, name: str, dpi: int = 160) -> Path:

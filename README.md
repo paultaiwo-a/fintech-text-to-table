@@ -10,19 +10,15 @@ The question is which pain points make people want to switch, and which rows loo
 
 From **27,991** narratives (Jan–Apr 2026). Charts in `results/figures/`.
 
-**1. Where switching intent shows up**
+**1. Where switching intent shows up, and how sure we are**: switching rate per pain point with 95% intervals and complaint volume. Fraud has by far the most complaints but the lowest switching rate.
 
 ![Switching rate by pain point](results/figures/switching_by_pain_point.png)
 
-**2. Volume ≠ switching** — fraud dominates complaints; other pain points switch more
-
-![Volume vs switching](results/figures/volume_vs_switching.png)
-
-**3. Acquisition funnel** — a small slice scores as hot leads
+**2. Acquisition funnel**: lead-signal score bands on a linear scale, with a zoom on the top bands.
 
 ![Lead signal funnel](results/figures/lead_signal_distribution.png)
 
-**4. Where to look first** — hot leads by pain point
+**3. Where to look first**: hot leads by pain point, as counts and shares.
 
 ![Hot leads by pain point](results/figures/hot_leads_by_pain_point.png)
 
