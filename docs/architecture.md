@@ -26,28 +26,23 @@ CFPB CSV                    config/
                    export (exports/fct_interaction.csv)
 ```
 
-```mermaid
-flowchart LR
-  A[complaints.csv] --> B[ingest]
-  B --> C[clean]
-  C --> D[extract]
-  D --> E[score]
-  E --> F[load SQLite]
-  F --> G[quality checks]
-  G --> H[insights + export]
-```
+
 
 ### What each step does
 
-| Step | Module | Output |
-| --- | --- | --- |
-| Ingest | `src/ingest.py` | `raw_complaints` |
-| Clean | `src/clean.py` | `stg_sentences` |
-| Extract | `src/extract.py` | pain point, switching, amounts, delays, evidence |
-| Score | `src/score.py` | sentiment, frustration, severity, lead signal |
-| Load | `src/load.py` | fact + dim tables in `db/signals.db` |
-| Quality | `src/quality.py` | row checks after load |
-| Insights | `src/insights.py` | SQL charts + CSV export |
+
+| Step     | Module            | Output                                           |
+| -------- | ----------------- | ------------------------------------------------ |
+| Ingest   | `src/ingest.py`   | `raw_complaints`                                 |
+| Clean    | `src/clean.py`    | `stg_sentences`                                  |
+| Extract  | `src/extract.py`  | pain point, switching, amounts, delays, evidence |
+| Score    | `src/score.py`    | sentiment, frustration, severity, lead signal    |
+| Load     | `src/load.py`     | fact + dim tables in `db/signals.db`             |
+| Quality  | `src/quality.py`  | row checks after load                            |
+| Insights | `src/insights.py` | SQL charts + CSV export                          |
+
+
+
 
 ### Tables people query
 
