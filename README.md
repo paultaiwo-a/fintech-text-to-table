@@ -10,7 +10,7 @@ The question is which pain points make people want to switch, and which rows loo
 
 As of September 2026, the live [Consumer Complaint Database](https://www.consumerfinance.gov/data-research/consumer-complaints/) no longer ships complaint narratives ([release notes](https://cfpb.github.io/api/ccdb/release-notes.html)). Narratives come from the [CFPB Narratives Archive](https://www.consumerfinance.gov/foia-requests/foia-electronic-reading-room/cfpb-consumer-complaint-database-narratives-archive/).
 
-**Source files (Full Records):**
+**Source files used here (Full Records):**
 
 - CCDB Export January 2026 through February 2026
 - CCDB Export March 2026
@@ -24,22 +24,33 @@ As of September 2026, the live [Consumer Complaint Database](https://www.consume
 - Money transfer, virtual currency, or money service → Mobile or digital wallet; Domestic (US) money transfer; International money transfer; Money order, traveler's check or cashier's check; Check cashing service
 - Non-empty **Consumer complaint narrative** only
 
-**Working file:** `data/raw/complaints.csv` — **27,991** rows (all with narratives). Pipeline cap is 100,000 (`config/scoring.yaml` → `ingest.max_rows`).
+The filtered working file is **27,991** rows. Raw data is not in git (`data/raw/` is ignored). Pipeline cap is 100,000 (`config/scoring.yaml` → `ingest.max_rows`).
 
-Flow diagram: `docs/architecture.md`. Scoring is in `docs/scoring.md`. Column list is in `docs/data_dictionary.md`. Charts land in `reports/figures/`.
+Flow diagram: `docs/architecture.md`. Scoring: `docs/scoring.md`. Columns: `docs/data_dictionary.md`.
 
-### How to Run
-
-Use the project venv (not system/Anaconda Python):
+### How to run (from this repo)
 
 ```bash
+git clone https://github.com/paultaiwo-a/fintech-text-to-table.git
+cd fintech-text-to-table
+
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+```
+
+Get a CSV that includes **Consumer complaint narrative** (Narratives Archive Full Records, or your own filtered export with that column). Then:
+
+```bash
+# put / rename your file here
+mkdir -p data/raw
+cp /path/to/your-export.csv data/raw/complaints.csv
 
 python -m src.build
 ```
 
-`python -m src.build` loads the CSV, cleans the text, extracts the fields, scores the rows, writes SQLite, runs the quality checks, and saves the charts. CSV export always runs; parquet is written only if `pyarrow` is installed.
+That rebuilds `db/signals.db`, writes `exports/fct_interaction.csv`, and saves charts under `reports/figures/`.
 
-Optional walkthrough: `notebooks/demo.ipynb`.
+Optional walkthrough after a successful build: `notebooks/demo.ipynb`.
+
+CSV export always runs. Parquet is written only if `pyarrow` is installed.
