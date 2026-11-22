@@ -9,7 +9,7 @@ import matplotlib.ticker as mticker
 import numpy as np
 import pandas as pd
 
-from src.paths import ANALYSIS_SQL_DIR, DB_PATH, FIGURES_DIR
+from src.paths import ANALYSIS_SQL_DIR, DB_PATH, EXPORTS_DIR, FIGURES_DIR
 from src.pipeline.ingest import init_db
 from src.viz import (
     ACCENT,
@@ -260,44 +260,23 @@ def chart_hot_leads_by_pain_point(df: pd.DataFrame, total_hot: int | None = None
     return path
 
 
-def plotly_top_leads(df: pd.DataFrame) -> Path | None:
-    """One interactive table for the demo notebook."""
+def export_top_leads(df: pd.DataFrame) -> Path | None:
+    """Write top lead-signal rows as CSV (open in Excel, Numbers, or the demo notebook)."""
     if df.empty:
         return None
-    try:
-        import plotly.graph_objects as go
-    except ImportError:
-        print("plotly not installed — skipping interactive leads table")
-        return None
 
-    show = df.head(50).copy()
+    show = df.copy()
     if "primary_pain_point" in show.columns:
         show["primary_pain_point"] = show["primary_pain_point"].map(label_pain)
 
-    fig = go.Figure(
-        data=[
-            go.Table(
-                header=dict(
-                    values=[c.replace("_", " ").title() for c in show.columns],
-                    fill_color=ACCENT,
-                    font=dict(color="white", size=12, family="Inter, Helvetica, sans-serif"),
-                    align="left",
-                    height=32,
-                ),
-                cells=dict(
-                    values=[show[c] for c in show.columns],
-                    fill_color=[["#ffffff", "#f4f7fa"] * (len(show) // 2 + 1)],
-                    align="left",
-                    font=dict(color=INK, size=11),
-                    height=28,
-                ),
-            )
-        ]
-    )
-    fig.update_layout(margin=dict(l=8, r=8, t=8, b=8), paper_bgcolor="white")
-    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
-    path = FIGURES_DIR / "top_lead_signals.html"
-    fig.write_html(str(path), include_plotlyjs="cdn")
+    EXPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    path = EXPORTS_DIR / "top_lead_signals.csv"
+    show.to_csv(path, index=False)
+
+    # Drop the old Plotly HTML if a previous build left it behind
+    stale_html = FIGURES_DIR / "top_lead_signals.html"
+    if stale_html.exists():
+        stale_html.unlink()
     return path
 
 
@@ -325,6 +304,7 @@ def run_insights(db_path: Path = DB_PATH) -> dict:
         "severity_vs_switching.png",
         "monthly_switching_trend.png",
         "volume_vs_switching.png",
+        "top_lead_signals.html",
     ):
         stale = FIGURES_DIR / stale_name
         if stale.exists():
@@ -337,7 +317,7 @@ def run_insights(db_path: Path = DB_PATH) -> dict:
             tables["switching"],
             total_hot=int((tables["lead_hist"]["lead_signal_score"] >= 75).sum()),
         ),
-        "leads_html": plotly_top_leads(tables["leads"]),
+        "leads_csv": export_top_leads(tables["leads"]),
     }
     print_summary(tables)
     written = {k: str(v) for k, v in paths.items() if v is not None}

@@ -22,9 +22,9 @@ From **27,991** narratives (Jan–Apr 2026). Charts in `results/figures/`.
 
 ![Hot leads by pain point](results/figures/hot_leads_by_pain_point.png)
 
-Interactive leads table: [`results/figures/top_lead_signals.html`](results/figures/top_lead_signals.html).
+Top leads: open `notebooks/demo.ipynb`, or the CSV written on build at `results/exports/top_lead_signals.csv`.
 
-SQLite + full CSV are built locally (not in git): `results/signals.db`, `results/exports/fct_interaction.csv`.
+SQLite + CSVs are built locally (not in git): `results/signals.db`, `results/exports/`.
 
 ### Layout
 
