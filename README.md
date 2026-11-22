@@ -39,7 +39,7 @@ src/            build, insights, evaluate, viz
 sql/            DDL + analysis queries
 docs/           architecture, scoring, data dictionary, how to run
 results/        figures (shared); db + exports (local after build)
-notebooks/      demo after a build
+notebooks/      run_pipeline (build) + demo (explore)
 ```
 
 ### Data
@@ -82,4 +82,4 @@ python -m src.build
 python -m src.build --csv /path/to/another-export.csv
 ```
 
-Optional: `notebooks/demo.ipynb`.
+Optional notebooks: `notebooks/run_pipeline.ipynb` (build from a CSV) or `notebooks/demo.ipynb` (explore results).

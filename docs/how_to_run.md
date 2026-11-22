@@ -61,7 +61,10 @@ Then run `python -m src.build` (or `--csv ...`) again.
 | `results/exports/fct_interaction.csv` | Main table export |
 | `results/figures/` | Charts from insights (sample PNGs are in git) |
 
-Optional after a successful build: open `notebooks/demo.ipynb` and Run All.
+Optional notebooks:
+
+- `notebooks/run_pipeline.ipynb` — set a CSV path and run the full build from Jupyter
+- `notebooks/demo.ipynb` — explore tables/charts after a successful build
 
 #### Flow
 

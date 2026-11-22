@@ -35,7 +35,7 @@ src/pipeline ingest → clean → extract → score → load → quality
 sql/         DDL + analysis queries
 docs/        architecture, scoring, data dictionary, how to run
 results/     figures (in git); signals.db + exports (local)
-notebooks/   thin demo after a build
+notebooks/   run_pipeline (build) + demo (explore)
 ```
 
 ### What each step does
