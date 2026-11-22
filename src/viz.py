@@ -4,6 +4,8 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 
+from src.paths import FIGURES_DIR
+
 # Tableau Color Blind 10
 TABLEAU_COLORBLIND = [
     "#1170aa",
@@ -20,7 +22,6 @@ TABLEAU_COLORBLIND = [
 
 BLUE = TABLEAU_COLORBLIND[0]
 ORANGE = TABLEAU_COLORBLIND[1]
-FIGURES_DIR = Path(__file__).resolve().parents[1] / "output" / "figures"
 
 
 def apply_style() -> None:

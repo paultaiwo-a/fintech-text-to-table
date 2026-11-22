@@ -6,6 +6,34 @@ CFPB complaint narratives turned into one table you can query. Each row is an in
 
 The question is which pain points make people want to switch, and which rows look like the strongest acquisition signals.
 
+### Results
+
+From **27,991** narratives (Jan–Apr 2026). Charts live in `results/figures/`.
+
+![Switching rate by pain point](results/figures/switching_by_pain_point.png)
+
+![Severity vs switching](results/figures/severity_vs_switching.png)
+
+![Lead signal distribution](results/figures/lead_signal_distribution.png)
+
+![Monthly switching trend](results/figures/monthly_switching_trend.png)
+
+Interactive leads table: [`results/figures/top_lead_signals.html`](results/figures/top_lead_signals.html).
+
+SQLite + full CSV are built locally (not in git): `results/signals.db`, `results/exports/fct_interaction.csv`.
+
+### Layout
+
+```text
+config/         scoring.yaml + lexicons
+src/pipeline/   ingest → clean → extract → score → load → quality
+src/            build, insights, evaluate, viz
+sql/            DDL + analysis queries
+docs/           architecture, scoring, data dictionary, how to run
+results/        figures (shared); db + exports (local after build)
+notebooks/      demo after a build
+```
+
 ### Data
 
 As of September 2026, the live [Consumer Complaint Database](https://www.consumerfinance.gov/data-research/consumer-complaints/) no longer ships complaint narratives ([release notes](https://cfpb.github.io/api/ccdb/release-notes.html)). Narratives come from the [CFPB Narratives Archive](https://www.consumerfinance.gov/foia-requests/foia-electronic-reading-room/cfpb-consumer-complaint-database-narratives-archive/).
@@ -24,15 +52,13 @@ As of September 2026, the live [Consumer Complaint Database](https://www.consume
 - Money transfer, virtual currency, or money service → Mobile or digital wallet; Domestic (US) money transfer; International money transfer; Money order, traveler's check or cashier's check; Check cashing service
 - Non-empty **Consumer complaint narrative** only
 
-The filtered working file is **27,991** rows. Raw data is not in git (`data/raw/` is ignored). Pipeline cap is 100,000 (`config/scoring.yaml` → `ingest.max_rows`).
+Raw data is not in git (`data/raw/` is ignored). Pipeline cap is 100,000 (`config/scoring.yaml` → `ingest.max_rows`).
 
-Flow diagram: `docs/architecture.md`. Run guide (default or another CFPB file): `docs/how_to_run.md`. Scoring: `docs/scoring.md`. Columns: `docs/data_dictionary.md`.
+Flow: `docs/architecture.md`. Run guide: `docs/how_to_run.md`. Scoring: `docs/scoring.md`. Columns: `docs/data_dictionary.md`.
 
 ### How to run
 
-Full steps (clone, data, default CSV, or `--csv` for another file): **`docs/how_to_run.md`**.
-
-Short version:
+Full steps: **`docs/how_to_run.md`**.
 
 ```bash
 git clone https://github.com/paultaiwo-a/fintech-text-to-table.git
@@ -40,7 +66,6 @@ cd fintech-text-to-table
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-# default path
 mkdir -p data/raw
 cp /path/to/your-export.csv data/raw/complaints.csv
 python -m src.build
@@ -49,4 +74,4 @@ python -m src.build
 python -m src.build --csv /path/to/another-export.csv
 ```
 
-Outputs: `output/signals.db`, `output/exports/fct_interaction.csv`, `output/figures/`. Optional: `notebooks/demo.ipynb`.
+Optional: `notebooks/demo.ipynb`.

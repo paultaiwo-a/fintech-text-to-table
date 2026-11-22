@@ -22,14 +22,23 @@ CFPB CSV                    config/
         |
    pipeline/quality.py -->  pass / fail checks
         |
-   insights.py         --> charts (output/figures/)
-                           export (output/exports/)
+   insights.py         --> charts (results/figures/)
+                           export (results/exports/)
 ```
 
+### Repo layout
 
+```text
+config/      scoring.yaml + lexicons (rules)
+src/         build, insights, evaluate, viz
+src/pipeline ingest → clean → extract → score → load → quality
+sql/         DDL + analysis queries
+docs/        architecture, scoring, data dictionary, how to run
+results/     figures (in git); signals.db + exports (local)
+notebooks/   thin demo after a build
+```
 
 ### What each step does
-
 
 | Step     | Module                     | Output                                           |
 | -------- | -------------------------- | ------------------------------------------------ |
@@ -37,12 +46,9 @@ CFPB CSV                    config/
 | Clean    | `src/pipeline/clean.py`    | `stg_sentences`                                  |
 | Extract  | `src/pipeline/extract.py`  | pain point, switching, amounts, delays, evidence |
 | Score    | `src/pipeline/score.py`    | sentiment, frustration, severity, lead signal    |
-| Load     | `src/pipeline/load.py`     | fact + dim tables in `output/signals.db`         |
+| Load     | `src/pipeline/load.py`     | fact + dim tables in `results/signals.db`        |
 | Quality  | `src/pipeline/quality.py`  | row checks after load                            |
 | Insights | `src/insights.py`          | SQL charts + CSV export                          |
-
-
-
 
 ### Tables people query
 

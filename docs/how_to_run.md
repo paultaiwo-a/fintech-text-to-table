@@ -57,9 +57,9 @@ Then run `python -m src.build` (or `--csv ...`) again.
 
 | Path | What it is |
 | --- | --- |
-| `output/signals.db` | SQLite tables (`fct_interaction`, evidence, dims) |
-| `output/exports/fct_interaction.csv` | Main table export |
-| `output/figures/` | Charts from insights |
+| `results/signals.db` | SQLite tables (`fct_interaction`, evidence, dims) |
+| `results/exports/fct_interaction.csv` | Main table export |
+| `results/figures/` | Charts from insights (sample PNGs are in git) |
 
 Optional after a successful build: open `notebooks/demo.ipynb` and Run All.
 

@@ -1,13 +1,11 @@
-# Data and local artifacts
+# Data and local artifacts (figures are tracked for the README)
 data/raw/
-output/*.db
-output/*.db-journal
-output/exports/*
-!output/exports/.gitkeep
-output/figures/*
-!output/figures/.gitkeep
-output/evaluation_metrics.csv
-output/pain_point_vs_cfpb_issue.csv
+results/*.db
+results/*.db-journal
+results/exports/*
+!results/exports/.gitkeep
+results/evaluation_metrics.csv
+results/pain_point_vs_cfpb_issue.csv
 
 # Python
 .venv/

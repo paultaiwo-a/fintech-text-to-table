@@ -7,9 +7,9 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from config.viz import BLUE, ORANGE, apply_style, categorical_colors, save_fig
 from src.paths import ANALYSIS_SQL_DIR, DB_PATH, FIGURES_DIR
 from src.pipeline.ingest import init_db
+from src.viz import BLUE, ORANGE, apply_style, categorical_colors, save_fig
 
 
 def _read_sql_file(name: str, con) -> pd.DataFrame:

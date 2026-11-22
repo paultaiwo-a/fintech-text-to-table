@@ -7,11 +7,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from src.paths import DB_PATH, LABELS_PATH, LABELS_TEMPLATE_PATH, OUTPUT_DIR
+from src.paths import DB_PATH, LABELS_PATH, LABELS_TEMPLATE_PATH, RESULTS_DIR
 from src.pipeline.ingest import init_db
 
 TEMPLATE_PATH = LABELS_TEMPLATE_PATH
-REPORTS_DIR = OUTPUT_DIR
+REPORTS_DIR = RESULTS_DIR
 
 LABEL_FIELDS = [
     "primary_pain_point",
