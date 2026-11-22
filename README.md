@@ -26,39 +26,27 @@ As of September 2026, the live [Consumer Complaint Database](https://www.consume
 
 The filtered working file is **27,991** rows. Raw data is not in git (`data/raw/` is ignored). Pipeline cap is 100,000 (`config/scoring.yaml` → `ingest.max_rows`).
 
-Flow diagram: `docs/architecture.md`. Scoring: `docs/scoring.md`. Columns: `docs/data_dictionary.md`.
+Flow diagram: `docs/architecture.md`. Run guide (default or another CFPB file): `docs/how_to_run.md`. Scoring: `docs/scoring.md`. Columns: `docs/data_dictionary.md`.
 
-### How to run (from this repo)
+### How to run
+
+Full steps (clone, data, default CSV, or `--csv` for another file): **`docs/how_to_run.md`**.
+
+Short version:
 
 ```bash
 git clone https://github.com/paultaiwo-a/fintech-text-to-table.git
 cd fintech-text-to-table
-
-python3 -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-```
 
-Get a CSV that includes **Consumer complaint narrative** (Narratives Archive Full Records, or your own filtered export with that column).
-
-**Option A — default path**
-
-```bash
+# default path
 mkdir -p data/raw
 cp /path/to/your-export.csv data/raw/complaints.csv
 python -m src.build
+
+# or another file
+python -m src.build --csv /path/to/another-export.csv
 ```
 
-**Option B — another file (no copy needed)**
-
-```bash
-python -m src.build --csv /path/to/another-cfpb-export.csv
-```
-
-You can point `--csv` at any compatible export. Ingest still filters by the products in `config/scoring.yaml` and caps rows at `ingest.max_rows`. Change those settings if you want different products or a higher cap.
-
-That rebuilds `db/signals.db`, writes `exports/fct_interaction.csv`, and saves charts under `reports/figures/`.
-
-Optional walkthrough after a successful build: `notebooks/demo.ipynb`.
-
-CSV export always runs. Parquet is written only if `pyarrow` is installed.
+Outputs: `db/signals.db`, `exports/fct_interaction.csv`, `reports/figures/`. Optional: `notebooks/demo.ipynb`.
