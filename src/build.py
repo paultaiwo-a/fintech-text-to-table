@@ -37,4 +37,14 @@ def build(csv_path: Path = DEFAULT_CSV, db_path: Path = DB_PATH) -> None:
 
 
 if __name__ == "__main__":
-    build()
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Rebuild the switching-signals tables")
+    parser.add_argument(
+        "--csv",
+        type=Path,
+        default=DEFAULT_CSV,
+        help="Path to a CFPB CSV with Consumer complaint narrative (default: data/raw/complaints.csv)",
+    )
+    args = parser.parse_args()
+    build(csv_path=args.csv)

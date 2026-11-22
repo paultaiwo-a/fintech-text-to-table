@@ -39,15 +39,23 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Get a CSV that includes **Consumer complaint narrative** (Narratives Archive Full Records, or your own filtered export with that column). Then:
+Get a CSV that includes **Consumer complaint narrative** (Narratives Archive Full Records, or your own filtered export with that column).
+
+**Option A — default path**
 
 ```bash
-# put / rename your file here
 mkdir -p data/raw
 cp /path/to/your-export.csv data/raw/complaints.csv
-
 python -m src.build
 ```
+
+**Option B — another file (no copy needed)**
+
+```bash
+python -m src.build --csv /path/to/another-cfpb-export.csv
+```
+
+You can point `--csv` at any compatible export. Ingest still filters by the products in `config/scoring.yaml` and caps rows at `ingest.max_rows`. Change those settings if you want different products or a higher cap.
 
 That rebuilds `db/signals.db`, writes `exports/fct_interaction.csv`, and saves charts under `reports/figures/`.
 
